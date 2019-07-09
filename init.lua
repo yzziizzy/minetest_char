@@ -1,10 +1,10 @@
 
-function deepclone(t)
+local function deepclone(t)
 	if type(t) ~= "table" then 
 		return t 
 	end
 	
-	local meta = getmetatable(t)
+	--local meta = getmetatable(t)
 	local target = {}
 	
 	for k, v in pairs(t) do
@@ -184,12 +184,14 @@ function make_charred_grass(mod, name)
 		local sn = "seasons:"..s.."_"..mod.."_"..name
 		
 		if minetest.registered_nodes[sn] then
+			local g = deepclone(minetest.registered_nodes[sn].groups)
+			g.charrable = 1 
 			minetest.override_item(sn, {
 				on_char = function(pos)
 					minetest.set_node(pos, {name="char:dirt_with_burnt_grass"})
 					minetest.check_for_falling(pos)
 				end,
-				groups = {charrable = 1}
+				groups = g
 			})
 		end
 		
