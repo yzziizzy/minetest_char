@@ -231,6 +231,7 @@ make_charred_grass("default", "dirt_with_grass_footsteps")
 make_charred_grass("default", "dirt_with_dry_grass")
 make_charred_grass("default", "dirt_with_snow")
 make_charred_grass("default", "dirt_with_rainforest_litter")
+make_charred_grass("default", "dirt_with_coniferous_litter")
 
 
 
