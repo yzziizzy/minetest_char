@@ -168,12 +168,14 @@ make_char_node("stairs", "slab_junglewood", 0)
 
 function make_charred_grass(mod, name)
 	if minetest.registered_nodes[mod..":"..name] then
+		local g = deepclone(minetest.registered_nodes[mod..":"..name].groups)
+		g.charrable = 1 
 		minetest.override_item(mod..":"..name, {
 			on_char = function(pos)
 				minetest.set_node(pos, {name="char:dirt_with_burnt_grass"})
 				minetest.check_for_falling(pos)
 			end,
-			groups = {charrable = 1}
+			groups = g,
 		})
 	end
 
@@ -313,8 +315,8 @@ minetest.register_abm({
 	label = "Grass regrowth",
 	nodenames = {"char:dirt_with_burnt_grass"},
 	neighbors = {"air"},
-	interval = 12,
-	chance = 80,
+	interval = 42,
+	chance = 680,
 	catch_up = false,
 	action = function(pos, node)
 		-- Check for darkness: night, shadow or under a light-blocking node
